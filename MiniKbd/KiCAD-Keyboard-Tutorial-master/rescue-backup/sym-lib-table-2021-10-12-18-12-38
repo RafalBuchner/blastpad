@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name tutorial-rescue)(type Legacy)(uri ${KIPRJMOD}/tutorial-rescue.lib)(options "")(descr ""))
-)
