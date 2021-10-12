@@ -1,0 +1,1267 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A3 16535 11693
+encoding utf-8
+Sheet 1 1
+Title ""
+Date "1 jul 2012"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L tutorial-rescue:GND #PWR01
+U 1 1 4F329C91
+P 1050 3600
+F 0 "#PWR01" H 1050 3600 30  0001 C CNN
+F 1 "GND" H 1050 3530 30  0001 C CNN
+F 2 "" H 1050 3600 60  0001 C CNN
+F 3 "" H 1050 3600 60  0001 C CNN
+	1    1050 3600
+	0    1    1    0   
+$EndComp
+Text Label 3700 5300 3    60   ~ 0
+COL0
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW0:2
+U 1 1 4EB1DE18
+P 5700 4750
+F 0 "SW0:2" H 5850 4860 50  0000 C CNN
+F 1 "ALT" H 5700 4670 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 5700 4750 60  0001 C CNN
+F 3 "" H 5700 4750 60  0001 C CNN
+	1    5700 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D0:2
+U 1 1 4EB1DE17
+P 5700 5100
+F 0 "D0:2" H 5700 5200 40  0000 C CNN
+F 1 "D" H 5700 5000 40  0000 C CNN
+F 2 "footprints:DIODE" H 5700 5100 60  0001 C CNN
+F 3 "" H 5700 5100 60  0001 C CNN
+	1    5700 5100
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW0:1
+U 1 1 4EB1DDEB
+P 4900 4750
+F 0 "SW0:1" H 5050 4860 50  0000 C CNN
+F 1 "SUPER" H 4900 4670 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 4900 4750 60  0001 C CNN
+F 3 "" H 4900 4750 60  0001 C CNN
+	1    4900 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D0:1
+U 1 1 4EB1DDEA
+P 4900 5100
+F 0 "D0:1" H 4900 5200 40  0000 C CNN
+F 1 "D" H 4900 5000 40  0000 C CNN
+F 2 "footprints:DIODE" H 4900 5100 60  0001 C CNN
+F 3 "" H 4900 5100 60  0001 C CNN
+	1    4900 5100
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW0:0
+U 1 1 4EB1DDAB
+P 4100 4750
+F 0 "SW0:0" H 4250 4860 50  0000 C CNN
+F 1 "CTRL" H 4100 4670 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 4100 4750 60  0001 C CNN
+F 3 "" H 4100 4750 60  0001 C CNN
+	1    4100 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D0:0
+U 1 1 4EB1DDAA
+P 4100 5100
+F 0 "D0:0" H 4100 5200 40  0000 C CNN
+F 1 "D" H 4100 5000 40  0000 C CNN
+F 2 "footprints:DIODE" H 4100 5100 60  0001 C CNN
+F 3 "" H 4100 5100 60  0001 C CNN
+	1    4100 5100
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:TEENSY2.0 U1
+U 1 1 4E035196
+P 1700 2650
+F 0 "U1" V 1750 2650 60  0000 C CNN
+F 1 "TEENSY2.0" V 1650 2650 60  0000 C CNN
+F 2 "footprints:TEENSY_2.0" H 1700 2650 60  0001 C CNN
+F 3 "" H 1700 2650 60  0001 C CNN
+	1    1700 2650
+	1    0    0    -1  
+$EndComp
+Text Label 3550 4550 2    60   ~ 0
+ROW0
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW2:5
+U 1 1 4D92DFA0
+P 8100 3050
+F 0 "SW2:5" H 8250 3160 50  0000 C CNN
+F 1 "G" H 8100 2970 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 8100 3050 60  0001 C CNN
+F 3 "" H 8100 3050 60  0001 C CNN
+	1    8100 3050
+	1    0    0    -1  
+$EndComp
+Text Label 8500 5300 3    60   ~ 0
+COL6
+Text Label 7700 5300 3    60   ~ 0
+COL5
+Text Label 6900 5300 3    60   ~ 0
+COL4
+Text Label 6100 5300 3    60   ~ 0
+COL3
+Text Label 5300 5300 3    60   ~ 0
+COL2
+Text Label 4500 5300 3    60   ~ 0
+COL1
+Text Label 3550 1150 2    60   ~ 0
+ROW4
+Text Label 3550 2000 2    60   ~ 0
+ROW3
+Text Label 3550 2850 2    60   ~ 0
+ROW2
+Text Label 3550 3700 2    60   ~ 0
+ROW1
+$Comp
+L tutorial-rescue:DIODE D1:6
+U 1 1 4D9C9F57
+P 8900 4250
+F 0 "D1:6" H 8900 4350 40  0000 C CNN
+F 1 "D" H 8900 4150 40  0000 C CNN
+F 2 "footprints:DIODE" H 8900 4250 60  0001 C CNN
+F 3 "" H 8900 4250 60  0001 C CNN
+	1    8900 4250
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D4:5
+U 1 1 4D9C9F54
+P 8100 1700
+F 0 "D4:5" H 8100 1800 40  0000 C CNN
+F 1 "D" H 8100 1600 40  0000 C CNN
+F 2 "footprints:DIODE" H 8100 1700 60  0001 C CNN
+F 3 "" H 8100 1700 60  0001 C CNN
+	1    8100 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D4:6
+U 1 1 4D9C9F51
+P 8900 1700
+F 0 "D4:6" H 8900 1800 40  0000 C CNN
+F 1 "D" H 8900 1600 40  0000 C CNN
+F 2 "footprints:DIODE" H 8900 1700 60  0001 C CNN
+F 3 "" H 8900 1700 60  0001 C CNN
+	1    8900 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D2:6
+U 1 1 4D9C9F50
+P 8900 3400
+F 0 "D2:6" H 8900 3500 40  0000 C CNN
+F 1 "D" H 8900 3300 40  0000 C CNN
+F 2 "footprints:DIODE" H 8900 3400 60  0001 C CNN
+F 3 "" H 8900 3400 60  0001 C CNN
+	1    8900 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D3:6
+U 1 1 4D9C9F4F
+P 8900 2550
+F 0 "D3:6" H 8900 2650 40  0000 C CNN
+F 1 "D" H 8900 2450 40  0000 C CNN
+F 2 "footprints:DIODE" H 8900 2550 60  0001 C CNN
+F 3 "" H 8900 2550 60  0001 C CNN
+	1    8900 2550
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D1:4
+U 1 1 4D9C9F3F
+P 7300 4250
+F 0 "D1:4" H 7300 4350 40  0000 C CNN
+F 1 "D" H 7300 4150 40  0000 C CNN
+F 2 "footprints:DIODE" H 7300 4250 60  0001 C CNN
+F 3 "" H 7300 4250 60  0001 C CNN
+	1    7300 4250
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D3:4
+U 1 1 4D9C9F3E
+P 7300 2550
+F 0 "D3:4" H 7300 2650 40  0000 C CNN
+F 1 "D" H 7300 2450 40  0000 C CNN
+F 2 "footprints:DIODE" H 7300 2550 60  0001 C CNN
+F 3 "" H 7300 2550 60  0001 C CNN
+	1    7300 2550
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D2:4
+U 1 1 4D9C9F3D
+P 7300 3400
+F 0 "D2:4" H 7300 3500 40  0000 C CNN
+F 1 "D" H 7300 3300 40  0000 C CNN
+F 2 "footprints:DIODE" H 7300 3400 60  0001 C CNN
+F 3 "" H 7300 3400 60  0001 C CNN
+	1    7300 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D4:2
+U 1 1 4D9C9F3C
+P 5700 1700
+F 0 "D4:2" H 5700 1800 40  0000 C CNN
+F 1 "D" H 5700 1600 40  0000 C CNN
+F 2 "footprints:DIODE" H 5700 1700 60  0001 C CNN
+F 3 "" H 5700 1700 60  0001 C CNN
+	1    5700 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D4:3
+U 1 1 4D9C9F39
+P 6500 1700
+F 0 "D4:3" H 6500 1800 40  0000 C CNN
+F 1 "D" H 6500 1600 40  0000 C CNN
+F 2 "footprints:DIODE" H 6500 1700 60  0001 C CNN
+F 3 "" H 6500 1700 60  0001 C CNN
+	1    6500 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D2:5
+U 1 1 4D9C9F38
+P 8100 3400
+F 0 "D2:5" H 8100 3500 40  0000 C CNN
+F 1 "D" H 8100 3300 40  0000 C CNN
+F 2 "footprints:DIODE" H 8100 3400 60  0001 C CNN
+F 3 "" H 8100 3400 60  0001 C CNN
+	1    8100 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D3:5
+U 1 1 4D9C9F37
+P 8100 2550
+F 0 "D3:5" H 8100 2650 40  0000 C CNN
+F 1 "D" H 8100 2450 40  0000 C CNN
+F 2 "footprints:DIODE" H 8100 2550 60  0001 C CNN
+F 3 "" H 8100 2550 60  0001 C CNN
+	1    8100 2550
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D1:5
+U 1 1 4D9C9F36
+P 8100 4250
+F 0 "D1:5" H 8100 4350 40  0000 C CNN
+F 1 "D" H 8100 4150 40  0000 C CNN
+F 2 "footprints:DIODE" H 8100 4250 60  0001 C CNN
+F 3 "" H 8100 4250 60  0001 C CNN
+	1    8100 4250
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D0:4
+U 1 1 4D9C9F34
+P 7300 5100
+F 0 "D0:4" H 7300 5200 40  0000 C CNN
+F 1 "D" H 7300 5000 40  0000 C CNN
+F 2 "footprints:DIODE" H 7300 5100 60  0001 C CNN
+F 3 "" H 7300 5100 60  0001 C CNN
+	1    7300 5100
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D4:4
+U 1 1 4D9C9F2D
+P 7300 1700
+F 0 "D4:4" H 7300 1800 40  0000 C CNN
+F 1 "D" H 7300 1600 40  0000 C CNN
+F 2 "footprints:DIODE" H 7300 1700 60  0001 C CNN
+F 3 "" H 7300 1700 60  0001 C CNN
+	1    7300 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D1:1
+U 1 1 4D9C9F27
+P 4900 4250
+F 0 "D1:1" H 4900 4350 40  0000 C CNN
+F 1 "D" H 4900 4150 40  0000 C CNN
+F 2 "footprints:DIODE" H 4900 4250 60  0001 C CNN
+F 3 "" H 4900 4250 60  0001 C CNN
+	1    4900 4250
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D3:0
+U 1 1 4D9C9F26
+P 4100 2550
+F 0 "D3:0" H 4100 2650 40  0000 C CNN
+F 1 "D" H 4100 2450 40  0000 C CNN
+F 2 "footprints:DIODE" H 4100 2550 60  0001 C CNN
+F 3 "" H 4100 2550 60  0001 C CNN
+	1    4100 2550
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D2:0
+U 1 1 4D9C9F25
+P 4100 3400
+F 0 "D2:0" H 4100 3500 40  0000 C CNN
+F 1 "D" H 4100 3300 40  0000 C CNN
+F 2 "footprints:DIODE" H 4100 3400 60  0001 C CNN
+F 3 "" H 4100 3400 60  0001 C CNN
+	1    4100 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D2:1
+U 1 1 4D9C9F20
+P 4900 3400
+F 0 "D2:1" H 4900 3500 40  0000 C CNN
+F 1 "D" H 4900 3300 40  0000 C CNN
+F 2 "footprints:DIODE" H 4900 3400 60  0001 C CNN
+F 3 "" H 4900 3400 60  0001 C CNN
+	1    4900 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D3:1
+U 1 1 4D9C9F1F
+P 4900 2550
+F 0 "D3:1" H 4900 2650 40  0000 C CNN
+F 1 "D" H 4900 2450 40  0000 C CNN
+F 2 "footprints:DIODE" H 4900 2550 60  0001 C CNN
+F 3 "" H 4900 2550 60  0001 C CNN
+	1    4900 2550
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D1:3
+U 1 1 4D9C9F1B
+P 6500 4250
+F 0 "D1:3" H 6500 4350 40  0000 C CNN
+F 1 "D" H 6500 4150 40  0000 C CNN
+F 2 "footprints:DIODE" H 6500 4250 60  0001 C CNN
+F 3 "" H 6500 4250 60  0001 C CNN
+	1    6500 4250
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D3:3
+U 1 1 4D9C9F1A
+P 6500 2550
+F 0 "D3:3" H 6500 2650 40  0000 C CNN
+F 1 "D" H 6500 2450 40  0000 C CNN
+F 2 "footprints:DIODE" H 6500 2550 60  0001 C CNN
+F 3 "" H 6500 2550 60  0001 C CNN
+	1    6500 2550
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D2:3
+U 1 1 4D9C9F19
+P 6500 3400
+F 0 "D2:3" H 6500 3500 40  0000 C CNN
+F 1 "D" H 6500 3300 40  0000 C CNN
+F 2 "footprints:DIODE" H 6500 3400 60  0001 C CNN
+F 3 "" H 6500 3400 60  0001 C CNN
+	1    6500 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D4:1
+U 1 1 4D9C9F18
+P 4900 1700
+F 0 "D4:1" H 4900 1800 40  0000 C CNN
+F 1 "D" H 4900 1600 40  0000 C CNN
+F 2 "footprints:DIODE" H 4900 1700 60  0001 C CNN
+F 3 "" H 4900 1700 60  0001 C CNN
+	1    4900 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D4:0
+U 1 1 4D9C9F15
+P 4100 1700
+F 0 "D4:0" H 4100 1800 40  0000 C CNN
+F 1 "D" H 4100 1600 40  0000 C CNN
+F 2 "footprints:DIODE" H 4100 1700 60  0001 C CNN
+F 3 "" H 4100 1700 60  0001 C CNN
+	1    4100 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D2:2
+U 1 1 4D9C9F14
+P 5700 3400
+F 0 "D2:2" H 5700 3500 40  0000 C CNN
+F 1 "D" H 5700 3300 40  0000 C CNN
+F 2 "footprints:DIODE" H 5700 3400 60  0001 C CNN
+F 3 "" H 5700 3400 60  0001 C CNN
+	1    5700 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D3:2
+U 1 1 4D9C9F13
+P 5700 2550
+F 0 "D3:2" H 5700 2650 40  0000 C CNN
+F 1 "D" H 5700 2450 40  0000 C CNN
+F 2 "footprints:DIODE" H 5700 2550 60  0001 C CNN
+F 3 "" H 5700 2550 60  0001 C CNN
+	1    5700 2550
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:DIODE D1:2
+U 1 1 4D9C9F12
+P 5700 4250
+F 0 "D1:2" H 5700 4350 40  0000 C CNN
+F 1 "D" H 5700 4150 40  0000 C CNN
+F 2 "footprints:DIODE" H 5700 4250 60  0001 C CNN
+F 3 "" H 5700 4250 60  0001 C CNN
+	1    5700 4250
+	-1   0    0    1   
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW0:4
+U 1 1 4D92E053
+P 7300 4750
+F 0 "SW0:4" H 7450 4860 50  0000 C CNN
+F 1 "SPACE" H 7300 4670 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_200H" H 7300 4750 60  0001 C CNN
+F 3 "" H 7300 4750 60  0001 C CNN
+	1    7300 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW2:6
+U 1 1 4D92DFBB
+P 8900 3050
+F 0 "SW2:6" H 9050 3160 50  0000 C CNN
+F 1 "H" H 8900 2970 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 8900 3050 60  0001 C CNN
+F 3 "" H 8900 3050 60  0001 C CNN
+	1    8900 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW1:6
+U 1 1 4D92DFAF
+P 8900 3900
+F 0 "SW1:6" H 9050 4010 50  0000 C CNN
+F 1 "B" H 8900 3820 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 8900 3900 60  0001 C CNN
+F 3 "" H 8900 3900 60  0001 C CNN
+	1    8900 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW3:6
+U 1 1 4D92DFAD
+P 8900 2200
+F 0 "SW3:6" H 9050 2310 50  0000 C CNN
+F 1 "Y" H 8900 2120 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 8900 2200 60  0001 C CNN
+F 3 "" H 8900 2200 60  0001 C CNN
+	1    8900 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW2:0
+U 1 1 4D92DFA6
+P 4100 3050
+F 0 "SW2:0" H 4250 3160 50  0000 C CNN
+F 1 "CAPS" H 4100 2970 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 4100 3050 60  0001 C CNN
+F 3 "" H 4100 3050 60  0001 C CNN
+	1    4100 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW2:1
+U 1 1 4D92DFA5
+P 4900 3050
+F 0 "SW2:1" H 5050 3160 50  0000 C CNN
+F 1 "A" H 4900 2970 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 4900 3050 60  0001 C CNN
+F 3 "" H 4900 3050 60  0001 C CNN
+	1    4900 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW2:2
+U 1 1 4D92DFA4
+P 5700 3050
+F 0 "SW2:2" H 5850 3160 50  0000 C CNN
+F 1 "S" H 5700 2970 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 5700 3050 60  0001 C CNN
+F 3 "" H 5700 3050 60  0001 C CNN
+	1    5700 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW2:3
+U 1 1 4D92DFA3
+P 6500 3050
+F 0 "SW2:3" H 6650 3160 50  0000 C CNN
+F 1 "D" H 6500 2970 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 6500 3050 60  0001 C CNN
+F 3 "" H 6500 3050 60  0001 C CNN
+	1    6500 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW2:4
+U 1 1 4D92DFA2
+P 7300 3050
+F 0 "SW2:4" H 7450 3160 50  0000 C CNN
+F 1 "F" H 7300 2970 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 7300 3050 60  0001 C CNN
+F 3 "" H 7300 3050 60  0001 C CNN
+	1    7300 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW1:5
+U 1 1 4D92DF9F
+P 8100 3900
+F 0 "SW1:5" H 8250 4010 50  0000 C CNN
+F 1 "V" H 8100 3820 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 8100 3900 60  0001 C CNN
+F 3 "" H 8100 3900 60  0001 C CNN
+	1    8100 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW1:4
+U 1 1 4D92DF9D
+P 7300 3900
+F 0 "SW1:4" H 7450 4010 50  0000 C CNN
+F 1 "C" H 7300 3820 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 7300 3900 60  0001 C CNN
+F 3 "" H 7300 3900 60  0001 C CNN
+	1    7300 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW1:3
+U 1 1 4D92DF9C
+P 6500 3900
+F 0 "SW1:3" H 6650 4010 50  0000 C CNN
+F 1 "X" H 6500 3820 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 6500 3900 60  0001 C CNN
+F 3 "" H 6500 3900 60  0001 C CNN
+	1    6500 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW1:2
+U 1 1 4D92DF9B
+P 5700 3900
+F 0 "SW1:2" H 5850 4010 50  0000 C CNN
+F 1 "Z" H 5700 3820 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 5700 3900 60  0001 C CNN
+F 3 "" H 5700 3900 60  0001 C CNN
+	1    5700 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW1:1
+U 1 1 4D92DF99
+P 4900 3900
+F 0 "SW1:1" H 5050 4010 50  0000 C CNN
+F 1 "SHIFT" H 4900 3820 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_200H" H 4900 3900 60  0001 C CNN
+F 3 "" H 4900 3900 60  0001 C CNN
+	1    4900 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW3:0
+U 1 1 4D92DF93
+P 4100 2200
+F 0 "SW3:0" H 4250 2310 50  0000 C CNN
+F 1 "TAB" H 4100 2120 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 4100 2200 60  0001 C CNN
+F 3 "" H 4100 2200 60  0001 C CNN
+	1    4100 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW3:1
+U 1 1 4D92DF92
+P 4900 2200
+F 0 "SW3:1" H 5050 2310 50  0000 C CNN
+F 1 "Q" H 4900 2120 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 4900 2200 60  0001 C CNN
+F 3 "" H 4900 2200 60  0001 C CNN
+	1    4900 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW3:2
+U 1 1 4D92DF91
+P 5700 2200
+F 0 "SW3:2" H 5850 2310 50  0000 C CNN
+F 1 "W" H 5700 2120 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 5700 2200 60  0001 C CNN
+F 3 "" H 5700 2200 60  0001 C CNN
+	1    5700 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW3:3
+U 1 1 4D92DF90
+P 6500 2200
+F 0 "SW3:3" H 6650 2310 50  0000 C CNN
+F 1 "E" H 6500 2120 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 6500 2200 60  0001 C CNN
+F 3 "" H 6500 2200 60  0001 C CNN
+	1    6500 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW3:4
+U 1 1 4D92DF8F
+P 7300 2200
+F 0 "SW3:4" H 7450 2310 50  0000 C CNN
+F 1 "R" H 7300 2120 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 7300 2200 60  0001 C CNN
+F 3 "" H 7300 2200 60  0001 C CNN
+	1    7300 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW3:5
+U 1 1 4D92DF8D
+P 8100 2200
+F 0 "SW3:5" H 8250 2310 50  0000 C CNN
+F 1 "T" H 8100 2120 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 8100 2200 60  0001 C CNN
+F 3 "" H 8100 2200 60  0001 C CNN
+	1    8100 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW4:3
+U 1 1 4D92DF30
+P 6500 1350
+F 0 "SW4:3" H 6650 1460 50  0000 C CNN
+F 1 "3" H 6500 1270 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 6500 1350 60  0001 C CNN
+F 3 "" H 6500 1350 60  0001 C CNN
+	1    6500 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW4:4
+U 1 1 4D92DF2F
+P 7300 1350
+F 0 "SW4:4" H 7450 1460 50  0000 C CNN
+F 1 "4" H 7300 1270 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 7300 1350 60  0001 C CNN
+F 3 "" H 7300 1350 60  0001 C CNN
+	1    7300 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW4:5
+U 1 1 4D92DF2D
+P 8100 1350
+F 0 "SW4:5" H 8250 1460 50  0000 C CNN
+F 1 "5" H 8100 1270 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 8100 1350 60  0001 C CNN
+F 3 "" H 8100 1350 60  0001 C CNN
+	1    8100 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW4:6
+U 1 1 4D92DF2C
+P 8900 1350
+F 0 "SW4:6" H 9050 1460 50  0000 C CNN
+F 1 "6" H 8900 1270 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 8900 1350 60  0001 C CNN
+F 3 "" H 8900 1350 60  0001 C CNN
+	1    8900 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW4:2
+U 1 1 4D92DF18
+P 5700 1350
+F 0 "SW4:2" H 5850 1460 50  0000 C CNN
+F 1 "2" H 5700 1270 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 5700 1350 60  0001 C CNN
+F 3 "" H 5700 1350 60  0001 C CNN
+	1    5700 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW4:1
+U 1 1 4D92DF15
+P 4900 1350
+F 0 "SW4:1" H 5050 1460 50  0000 C CNN
+F 1 "1" H 4900 1270 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 4900 1350 60  0001 C CNN
+F 3 "" H 4900 1350 60  0001 C CNN
+	1    4900 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW4:0
+U 1 1 4D92DF12
+P 4100 1350
+F 0 "SW4:0" H 4250 1460 50  0000 C CNN
+F 1 "TILDE" H 4100 1270 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 4100 1350 60  0001 C CNN
+F 3 "" H 4100 1350 60  0001 C CNN
+	1    4100 1350
+	1    0    0    -1  
+$EndComp
+Text Label 2300 1750 0    60   ~ 0
+ROW4
+Text Label 2300 1650 0    60   ~ 0
+ROW3
+Text Label 2300 1550 0    60   ~ 0
+ROW2
+Text Label 2300 1450 0    60   ~ 0
+ROW1
+Text Label 2300 1350 0    60   ~ 0
+ROW0
+Text Label 2300 1850 0    60   ~ 0
+LED_A
+Text Label 2300 1950 0    60   ~ 0
+LED_B
+Text Label 2300 2950 0    60   ~ 0
+COL0
+Text Label 2300 2300 0    60   ~ 0
+COL1
+Text Label 2300 2200 0    60   ~ 0
+COL2
+Text Label 2300 2850 0    60   ~ 0
+COL3
+Text Label 2300 2450 0    60   ~ 0
+COL4
+Text Label 2300 3300 0    60   ~ 0
+COL5
+Text Label 2300 3450 0    60   ~ 0
+COL6
+Text Label 2300 3550 0    60   ~ 0
+COL7
+Text Label 2300 3650 0    60   ~ 0
+COL8
+Text Label 2300 3750 0    60   ~ 0
+COL9
+Text Label 2300 3850 0    60   ~ 0
+COL10
+Text Label 2300 3950 0    60   ~ 0
+COL11
+Text Label 2300 3150 0    60   ~ 0
+COL12
+Text Label 2300 3050 0    60   ~ 0
+COL13
+$Comp
+L tutorial-rescue:GND #PWR04
+U 1 1 4FD8874F
+P 1050 3500
+F 0 "#PWR04" H 1050 3500 30  0001 C CNN
+F 1 "GND" H 1050 3430 30  0001 C CNN
+F 2 "" H 1050 3500 60  0001 C CNN
+F 3 "" H 1050 3500 60  0001 C CNN
+	1    1050 3500
+	0    1    1    0   
+$EndComp
+$Comp
+L tutorial-rescue:VCC #PWR05
+U 1 1 4FF00683
+P 1100 3050
+F 0 "#PWR05" H 1100 3150 30  0001 C CNN
+F 1 "VCC" H 1100 3150 30  0000 C CNN
+F 2 "" H 1100 3050 60  0001 C CNN
+F 3 "" H 1100 3050 60  0001 C CNN
+	1    1100 3050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L tutorial-rescue:VCC #PWR06
+U 1 1 4FF00690
+P 1100 3150
+F 0 "#PWR06" H 1100 3250 30  0001 C CNN
+F 1 "VCC" H 1100 3250 30  0000 C CNN
+F 2 "" H 1100 3150 60  0001 C CNN
+F 3 "" H 1100 3150 60  0001 C CNN
+	1    1100 3150
+	0    -1   -1   0   
+$EndComp
+Text Label 2300 2050 0    60   ~ 0
+LED_C
+Wire Wire Line
+	3900 5100 3700 5100
+Connection ~ 3700 5100
+Wire Wire Line
+	4700 4250 4500 4250
+Wire Wire Line
+	3900 3400 3700 3400
+Connection ~ 3700 3400
+Wire Wire Line
+	3900 2550 3700 2550
+Connection ~ 3700 2550
+Wire Wire Line
+	4400 4750 4400 5100
+Wire Wire Line
+	4400 5100 4300 5100
+Wire Wire Line
+	5200 3900 5200 4250
+Wire Wire Line
+	5200 4250 5100 4250
+Wire Wire Line
+	4400 3050 4400 3400
+Wire Wire Line
+	4400 3400 4300 3400
+Wire Wire Line
+	4400 2200 4400 2550
+Wire Wire Line
+	4400 2550 4300 2550
+Wire Wire Line
+	4400 1350 4400 1700
+Wire Wire Line
+	4400 1700 4300 1700
+Wire Wire Line
+	4700 5100 4500 5100
+Connection ~ 4500 5100
+Wire Wire Line
+	4700 3400 4500 3400
+Connection ~ 4500 3400
+Wire Wire Line
+	4700 2550 4500 2550
+Connection ~ 4500 2550
+Wire Wire Line
+	5200 4750 5200 5100
+Wire Wire Line
+	5200 5100 5100 5100
+Wire Wire Line
+	5200 3050 5200 3400
+Wire Wire Line
+	5200 3400 5100 3400
+Wire Wire Line
+	5200 2200 5200 2550
+Wire Wire Line
+	5200 2550 5100 2550
+Wire Wire Line
+	5200 1350 5200 1700
+Wire Wire Line
+	5200 1700 5100 1700
+Wire Wire Line
+	5500 5100 5300 5100
+Connection ~ 5300 5100
+Wire Wire Line
+	5500 4250 5300 4250
+Connection ~ 5300 4250
+Wire Wire Line
+	5500 3400 5300 3400
+Connection ~ 5300 3400
+Wire Wire Line
+	5500 2550 5300 2550
+Connection ~ 5300 2550
+Wire Wire Line
+	6000 4750 6000 5100
+Wire Wire Line
+	6000 5100 5900 5100
+Wire Wire Line
+	6000 3900 6000 4250
+Wire Wire Line
+	6000 4250 5900 4250
+Wire Wire Line
+	6000 3050 6000 3400
+Wire Wire Line
+	6000 3400 5900 3400
+Wire Wire Line
+	6000 2200 6000 2550
+Wire Wire Line
+	6000 2550 5900 2550
+Wire Wire Line
+	6000 1350 6000 1700
+Wire Wire Line
+	6000 1700 5900 1700
+Wire Wire Line
+	6300 4250 6100 4250
+Connection ~ 6100 4250
+Wire Wire Line
+	6300 3400 6100 3400
+Connection ~ 6100 3400
+Wire Wire Line
+	6300 2550 6100 2550
+Connection ~ 6100 2550
+Wire Wire Line
+	6800 3900 6800 4250
+Wire Wire Line
+	6800 4250 6700 4250
+Wire Wire Line
+	6800 3050 6800 3400
+Wire Wire Line
+	6800 3400 6700 3400
+Wire Wire Line
+	6800 2200 6800 2550
+Wire Wire Line
+	6800 2550 6700 2550
+Wire Wire Line
+	6800 1350 6800 1700
+Wire Wire Line
+	6800 1700 6700 1700
+Wire Wire Line
+	7100 4250 6900 4250
+Connection ~ 6900 4250
+Wire Wire Line
+	7100 3400 6900 3400
+Connection ~ 6900 3400
+Wire Wire Line
+	7100 2550 6900 2550
+Connection ~ 6900 2550
+Wire Wire Line
+	7600 3900 7600 4250
+Wire Wire Line
+	7600 4250 7500 4250
+Wire Wire Line
+	7600 3050 7600 3400
+Wire Wire Line
+	7600 3400 7500 3400
+Wire Wire Line
+	7600 2200 7600 2550
+Wire Wire Line
+	7600 2550 7500 2550
+Wire Wire Line
+	7600 1350 7600 1700
+Wire Wire Line
+	7600 1700 7500 1700
+Wire Wire Line
+	7900 4250 7700 4250
+Connection ~ 7700 4250
+Wire Wire Line
+	7900 3400 7700 3400
+Connection ~ 7700 3400
+Wire Wire Line
+	7900 2550 7700 2550
+Connection ~ 7700 2550
+Wire Wire Line
+	8400 3900 8400 4250
+Wire Wire Line
+	8400 4250 8300 4250
+Wire Wire Line
+	8400 3050 8400 3400
+Wire Wire Line
+	8400 3400 8300 3400
+Wire Wire Line
+	8400 2200 8400 2550
+Wire Wire Line
+	8400 2550 8300 2550
+Wire Wire Line
+	8400 1350 8400 1700
+Wire Wire Line
+	8400 1700 8300 1700
+Wire Wire Line
+	8700 4250 8500 4250
+Connection ~ 8500 4250
+Wire Wire Line
+	8700 3400 8500 3400
+Connection ~ 8500 3400
+Wire Wire Line
+	8700 2550 8500 2550
+Connection ~ 8500 2550
+Wire Wire Line
+	9200 3900 9200 4250
+Wire Wire Line
+	9200 4250 9100 4250
+Wire Wire Line
+	9200 3050 9200 3400
+Wire Wire Line
+	9200 3400 9100 3400
+Wire Wire Line
+	9200 2200 9200 2550
+Wire Wire Line
+	9200 2550 9100 2550
+Wire Wire Line
+	9200 1350 9200 1700
+Wire Wire Line
+	9200 1700 9100 1700
+Wire Wire Line
+	7100 5100 6900 5100
+Wire Wire Line
+	7600 4750 7600 5100
+Wire Wire Line
+	7600 5100 7500 5100
+Wire Wire Line
+	3900 1700 3700 1700
+Wire Wire Line
+	3700 1700 3700 2550
+Wire Wire Line
+	4500 5300 4500 5100
+Wire Wire Line
+	4500 1700 4700 1700
+Wire Wire Line
+	5500 1700 5300 1700
+Wire Wire Line
+	5300 1700 5300 2550
+Wire Wire Line
+	6100 5300 6100 4250
+Wire Wire Line
+	6100 1700 6300 1700
+Wire Wire Line
+	7100 1700 6900 1700
+Wire Wire Line
+	6900 1700 6900 2550
+Wire Wire Line
+	7700 5300 7700 4250
+Wire Wire Line
+	7700 1700 7900 1700
+Wire Wire Line
+	8700 1700 8500 1700
+Wire Wire Line
+	8500 1700 8500 2550
+Wire Wire Line
+	3550 1150 3800 1150
+Wire Wire Line
+	8600 1350 8600 1150
+Wire Wire Line
+	7800 1350 7800 1150
+Connection ~ 7800 1150
+Wire Wire Line
+	7000 1350 7000 1150
+Connection ~ 7000 1150
+Wire Wire Line
+	6200 1350 6200 1150
+Connection ~ 6200 1150
+Wire Wire Line
+	5400 1350 5400 1150
+Connection ~ 5400 1150
+Wire Wire Line
+	4600 1350 4600 1150
+Connection ~ 4600 1150
+Wire Wire Line
+	3800 1350 3800 1150
+Connection ~ 3800 1150
+Wire Wire Line
+	3550 2000 3800 2000
+Wire Wire Line
+	8600 2200 8600 2000
+Wire Wire Line
+	7800 2200 7800 2000
+Connection ~ 7800 2000
+Wire Wire Line
+	7000 2200 7000 2000
+Connection ~ 7000 2000
+Wire Wire Line
+	6200 2200 6200 2000
+Connection ~ 6200 2000
+Wire Wire Line
+	5400 2200 5400 2000
+Connection ~ 5400 2000
+Wire Wire Line
+	4600 2200 4600 2000
+Connection ~ 4600 2000
+Wire Wire Line
+	3800 2200 3800 2000
+Connection ~ 3800 2000
+Wire Wire Line
+	8600 3050 8600 2850
+Wire Wire Line
+	7800 3050 7800 2850
+Connection ~ 7800 2850
+Wire Wire Line
+	7000 3050 7000 2850
+Connection ~ 7000 2850
+Wire Wire Line
+	6200 3050 6200 2850
+Connection ~ 6200 2850
+Wire Wire Line
+	5400 3050 5400 2850
+Connection ~ 5400 2850
+Wire Wire Line
+	4600 3050 4600 2850
+Connection ~ 4600 2850
+Wire Wire Line
+	3800 3050 3800 2850
+Connection ~ 3800 2850
+Wire Wire Line
+	8600 3900 8600 3700
+Wire Wire Line
+	7800 3900 7800 3700
+Connection ~ 7800 3700
+Wire Wire Line
+	7000 3900 7000 3700
+Connection ~ 7000 3700
+Wire Wire Line
+	6200 3900 6200 3700
+Connection ~ 6200 3700
+Wire Wire Line
+	5400 3900 5400 3700
+Connection ~ 5400 3700
+Wire Wire Line
+	4600 3900 4600 3700
+Wire Wire Line
+	3800 4750 3800 4550
+Connection ~ 3800 4550
+Wire Wire Line
+	4600 4750 4600 4550
+Connection ~ 4600 4550
+Wire Wire Line
+	5400 4750 5400 4550
+Connection ~ 5400 4550
+Wire Wire Line
+	7000 4750 7000 4550
+NoConn ~ 1100 1450
+NoConn ~ 1100 1350
+Connection ~ 6900 5100
+Connection ~ 4600 3700
+Connection ~ 4500 4250
+Wire Wire Line
+	3700 5100 3700 5300
+Wire Wire Line
+	3700 3400 3700 5100
+Wire Wire Line
+	3700 2550 3700 3400
+Wire Wire Line
+	4500 5100 4500 4250
+Wire Wire Line
+	4500 3400 4500 2550
+Wire Wire Line
+	4500 2550 4500 1700
+Wire Wire Line
+	5300 5100 5300 5300
+Wire Wire Line
+	5300 4250 5300 5100
+Wire Wire Line
+	5300 3400 5300 4250
+Wire Wire Line
+	5300 2550 5300 3400
+Wire Wire Line
+	6100 4250 6100 3400
+Wire Wire Line
+	6100 3400 6100 2550
+Wire Wire Line
+	6100 2550 6100 1700
+Wire Wire Line
+	6900 4250 6900 5100
+Wire Wire Line
+	6900 3400 6900 4250
+Wire Wire Line
+	6900 2550 6900 3400
+Wire Wire Line
+	7700 4250 7700 3400
+Wire Wire Line
+	7700 3400 7700 2550
+Wire Wire Line
+	7700 2550 7700 1700
+Wire Wire Line
+	8500 4250 8500 5300
+Wire Wire Line
+	8500 3400 8500 4250
+Wire Wire Line
+	8500 2550 8500 3400
+Wire Wire Line
+	7800 1150 8600 1150
+Wire Wire Line
+	7000 1150 7800 1150
+Wire Wire Line
+	6200 1150 7000 1150
+Wire Wire Line
+	5400 1150 6200 1150
+Wire Wire Line
+	4600 1150 5400 1150
+Wire Wire Line
+	3800 1150 4600 1150
+Wire Wire Line
+	7800 2000 8600 2000
+Wire Wire Line
+	7000 2000 7800 2000
+Wire Wire Line
+	6200 2000 7000 2000
+Wire Wire Line
+	5400 2000 6200 2000
+Wire Wire Line
+	4600 2000 5400 2000
+Wire Wire Line
+	3800 2000 4600 2000
+Wire Wire Line
+	8600 2850 7800 2850
+Wire Wire Line
+	7800 2850 7000 2850
+Wire Wire Line
+	7000 2850 6200 2850
+Wire Wire Line
+	6200 2850 5400 2850
+Wire Wire Line
+	5400 2850 4600 2850
+Wire Wire Line
+	4600 2850 3800 2850
+Wire Wire Line
+	3800 2850 3550 2850
+Wire Wire Line
+	8600 3700 7800 3700
+Wire Wire Line
+	7800 3700 7000 3700
+Wire Wire Line
+	7000 3700 6200 3700
+Wire Wire Line
+	6200 3700 5400 3700
+Wire Wire Line
+	5400 3700 4600 3700
+Wire Wire Line
+	3800 4550 3550 4550
+Wire Wire Line
+	4600 4550 3800 4550
+Wire Wire Line
+	5400 4550 4600 4550
+Wire Wire Line
+	7000 4550 5400 4550
+Wire Wire Line
+	6900 5100 6900 5300
+Wire Wire Line
+	4600 3700 3550 3700
+Wire Wire Line
+	4500 4250 4500 3400
+$Comp
+L userLibrary:sh1106 Display1
+U 1 1 61A2430C
+P 1650 6350
+F 0 "Display1" H 1928 6408 50  0000 L CNN
+F 1 "sh1106" H 1928 6317 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical" H 1928 6226 50  0000 L CNN
+F 3 "" H 1650 6350 50  0001 C CNN
+	1    1650 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L tutorial-rescue:SWITCH_PUSH SW:WHEEL1
+U 1 1 61A3001E
+P 10600 2300
+F 0 "SW:WHEEL1" H 10750 2410 50  0000 C CNN
+F 1 "wheel switch" H 10600 2220 50  0000 C CNN
+F 2 "footprints:CHERRY_PCB_100H" H 10600 2300 60  0001 C CNN
+F 3 "" H 10600 2300 60  0001 C CNN
+	1    10600 2300
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
