@@ -1,24 +1,11 @@
-update=Sat 07 Jul 2012 01:31:07 PM CEST
+update=2021 October 12, Tuesday 23:20:51
 version=1
-last_client=pcbnew
+last_client=eeschema
 [general]
 version=1
 [cvpcb]
 version=1
 NetIExt=net
-[eeschema]
-version=1
-LibDir=
-NetFmtName=
-HPGLSpd=20
-HPGLDm=15
-HPGLNum=1
-RptD_X=0
-RptD_Y=100
-RptLab=1
-LabSize=60
-[eeschema/libraries]
-LibName1=components
 [pcbnew]
 version=1
 LastNetListRead=AFMini.net
@@ -39,3 +26,6 @@ MSegLar=150
 [pcbnew/libraries]
 LibDir=
 LibName1=footprints
+[eeschema]
+version=1
+LibDir=

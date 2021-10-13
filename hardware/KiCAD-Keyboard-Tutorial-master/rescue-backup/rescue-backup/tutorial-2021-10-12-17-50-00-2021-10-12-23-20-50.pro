@@ -1,11 +1,24 @@
-update=2021 October 12, Tuesday 23:36:09
+update=Sat 07 Jul 2012 01:31:07 PM CEST
 version=1
-last_client=kicad
+last_client=pcbnew
 [general]
 version=1
 [cvpcb]
 version=1
 NetIExt=net
+[eeschema]
+version=1
+LibDir=
+NetFmtName=
+HPGLSpd=20
+HPGLDm=15
+HPGLNum=1
+RptD_X=0
+RptD_Y=100
+RptLab=1
+LabSize=60
+[eeschema/libraries]
+LibName1=components
 [pcbnew]
 version=1
 LastNetListRead=AFMini.net
@@ -26,16 +39,3 @@ MSegLar=150
 [pcbnew/libraries]
 LibDir=
 LibName1=footprints
-[eeschema]
-version=1
-LibDir=
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceAjustPassiveValues=0
-LabSize=50
-ERC_TestSimilarLabels=1

@@ -1,4 +1,4 @@
-update=2021 October 12, Tuesday 23:36:09
+update=2021 October 12, Tuesday 17:53:08
 version=1
 last_client=kicad
 [general]
@@ -29,13 +29,3 @@ LibName1=footprints
 [eeschema]
 version=1
 LibDir=
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceAjustPassiveValues=0
-LabSize=50
-ERC_TestSimilarLabels=1
