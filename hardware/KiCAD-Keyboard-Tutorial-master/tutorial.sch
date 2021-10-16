@@ -539,27 +539,27 @@ F 3 "" H 7100 1200 60  0001 C CNN
 	1    7100 1200
 	1    0    0    -1  
 $EndComp
-Text Label 4550 4800 0    60   ~ 0
+Text Label 4550 4300 0    60   ~ 0
 ROW4
-Text Label 4550 4700 0    60   ~ 0
+Text Label 4550 4400 0    60   ~ 0
 ROW3
 Text Label 4550 4500 0    60   ~ 0
 ROW2
-Text Label 4550 4400 0    60   ~ 0
+Text Label 4550 4700 0    60   ~ 0
 ROW1
-Text Label 4550 4300 0    60   ~ 0
+Text Label 4550 4800 0    60   ~ 0
 ROW0
-Text Label 3150 3200 2    60   ~ 0
+Text Label 3150 3400 2    60   ~ 0
 EN1_B
-Text Label 3150 4300 2    60   ~ 0
+Text Label 4550 4200 0    60   ~ 0
 COL0
-Text Label 3150 4400 2    60   ~ 0
+Text Label 4550 4000 0    60   ~ 0
 COL1
-Text Label 3150 4500 2    60   ~ 0
+Text Label 4550 3800 0    60   ~ 0
 COL2
-Text Label 3150 4700 2    60   ~ 0
+Text Label 4550 3700 0    60   ~ 0
 COL3
-Text Label 3150 4800 2    60   ~ 0
+Text Label 4550 3500 0    60   ~ 0
 COL4
 Text Label 3150 3900 2    60   ~ 0
 SDA
@@ -886,14 +886,12 @@ F 3 "" H 1650 5400 60  0001 C CNN
 	1    1650 5400
 	1    0    0    -1  
 $EndComp
-Text Label 3150 3500 2    60   ~ 0
+Text Label 3150 3300 2    60   ~ 0
 EN2_A
-Text Label 3150 3400 2    60   ~ 0
+Text Label 3150 3200 2    60   ~ 0
 EN2_B
-Text Label 4550 4200 0    60   ~ 0
+Text Label 3150 2900 2    60   ~ 0
 SW_WHEEL
-Text Label 4550 3800 0    60   ~ 0
-EN1_SW
 Text Label 1750 6700 3    60   ~ 0
 SCL
 $Comp
@@ -988,10 +986,10 @@ F 3 "" H 5600 7000 60  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L MCU_RaspberryPi_and_Boards:Pico MCU
+L MCU_RaspberryPi_and_Boards:Pico MCU1
 U 1 1 61665D33
 P 3850 3850
-F 0 "MCU" H 3850 5155 50  0000 C CNN
+F 0 "MCU1" H 3850 5155 50  0000 C CNN
 F 1 "Pico" H 3850 5064 50  0000 C CNN
 F 2 "MCU_RaspberryPi_and_Boards:RPi_Pico_SMD_TH" H 3850 4973 50  0000 C CNN
 F 3 "" H 3850 3850 50  0001 C CNN
@@ -1099,7 +1097,7 @@ F 3 "" H 4600 3100 60  0001 C CNN
 $EndComp
 Text Label 3150 4000 2    60   ~ 0
 SCL
-Text Label 3150 3300 2    60   ~ 0
+Text Label 3150 3500 2    60   ~ 0
 EN1_A
 Text Label 1850 6700 3    60   ~ 0
 SDA
@@ -1125,17 +1123,19 @@ F 3 "" H 4900 6900 60  0001 C CNN
 	1    4900 6900
 	0    1    1    0   
 $EndComp
-Text Label 4550 3700 0    60   ~ 0
+Text Label 3150 4800 2    60   ~ 0
 EN2_SW
 $Comp
-L userLibrary:sh1106 DISPLAY
+L userLibrary:sh1106 DISPLAY1
 U 1 1 61691921
 P 1650 6350
-F 0 "DISPLAY" H 1928 6363 50  0000 L CNN
+F 0 "DISPLAY1" H 1928 6363 50  0000 L CNN
 F 1 "sh1106" H 1928 6272 50  0000 L CNN
 F 2 "user_footprints:4pin oled display 1,3" H 1650 6350 50  0001 C CNN
 F 3 "" H 1650 6350 50  0001 C CNN
 	1    1650 6350
 	1    0    0    -1  
 $EndComp
+Text Label 3150 3000 2    60   ~ 0
+EN1_SW
 $EndSCHEMATC
