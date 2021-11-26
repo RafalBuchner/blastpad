@@ -1,11 +1,31 @@
-import sys
+import sys, os
 import json
 from collections import OrderedDict
+import pprint
 # from PyQt5.QtCore import Qt, QSize
 # from PyQt5.QtWidgets import QApplication, QGridLayout, QLabel, QMainWindow, QWidget, QPushButton
 
 from layout_colorwidget import Color
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+CONFIG_PATH = "/Volumes/BlastPad/configs"
+
+def convertSymbolicToAdafruitNames(shortcut):
+    shortcut = [ MACOS_KEYS_Inverted.get(i, i) for i in shortcut ]
+    shortcut = [ QT_CONVERSION.get(i, i) for i in shortcut ]
+    shortcut = [ QT_TO_ADAFRUIT.get(i, i) for i in shortcut ]
+    return shortcut
+
+def convertAdafruitToSymbolicNames(shortcut):
+    shortcut = [ QT_TO_ADAFRUIT_Inverted.get(i, i) for i in shortcut ]
+    shortcut = [ MACOS_KEYS.get(i, i) for i in shortcut ]
+    # shortcut = [ QT_CONVERSION_Inverted.get(i, i) for i in shortcut ]
+    return shortcut
+def convertAdafruitConfigToSymbolic(blastPadDict):
+    blastPadDict["shortcuts"] = [convertAdafruitToSymbolicNames(shortcut) for shortcut in blastPadDict["shortcuts"]]
+    for enName, shortcuts in blastPadDict["wheels"].items():
+        blastPadDict["wheels"][enName] = [convertAdafruitToSymbolicNames(shortcut) for shortcut in shortcuts]
+    return blastPadDict
 
 QT_CONVERSION = {
         "Meta":"Control",
@@ -15,6 +35,8 @@ QT_CONVERSION = {
         "Del":"Delete",
     }
 
+QT_CONVERSION_Inverted = {v: k for k, v in QT_CONVERSION.items()}
+1234567890123456789012345678901234567890123456
 QT_TO_ADAFRUIT = {
     "1":"ONE",
     "2":"TWO",
@@ -130,9 +152,12 @@ QT_TO_ADAFRUIT = {
     "Right_Gui":"RIGHT_GUI", # extra
 }
 
+QT_TO_ADAFRUIT_Inverted = {v: k for k, v in QT_TO_ADAFRUIT.items()}
+
 MACOS_KEYS = {
     "Meta":"⌃",
     "Ctrl":"⌘",
+    "Command":"⌘",
     "Shift":"⇧",
     "Alt":"⌥",
     "Return":"↵",
@@ -179,31 +204,7 @@ SHIFT_FIX = {
 
         }
 
-DEFAULT_HOTKEYS = [
-    ['ONE'],
-    ['TWO'],
-    ['THREE'],
-    ['FOUR'],
-    ['FIVE'],
-    ['TAB'],
-    ['Q'],
-    ['W'],
-    ['E'],
-    ['R'],
-    ['CAPS_LOCK'],
-    ['A'],
-    ['S'],
-    ['D'],
-    ['F'],
-    ['SHIFT'],
-    ['Z'],
-    ['X'],
-    ['C'],
-    ['CONTROL'],
-    ['OPTION'],
-    ['COMMAND'],
-    ['SPACE'],
-]
+DEFAULT_HOTKEYS = [ convertAdafruitToSymbolicNames(shortcut) for shortcut in  [['ONE'], ['TWO'], ['THREE'], ['FOUR'], ['FIVE'], ['TAB'], ['Q'], ['W'], ['E'], ['R'], ['CAPS_LOCK'], ['A'], ['S'], ['D'], ['F'], ['SHIFT'], ['Z'], ['X'], ['C'], ['CONTROL'], ['OPTION'], ['COMMAND'], ['SPACE']]]
 class KeySequenceEdit(QtWidgets.QKeySequenceEdit):
     def keyPressEvent(self, event):
         super(KeySequenceEdit, self).keyPressEvent(event)
@@ -227,14 +228,15 @@ class KeySequenceEdit(QtWidgets.QKeySequenceEdit):
 
 
 class HotKeyWidget(QtWidgets.QWidget):
-    def __init__(self, callback, btnIndex):
+    do_convert_to_adafruit_names = False
+    def __init__(self, callback, myData):
         super(HotKeyWidget, self).__init__()
-        self.seqList = []
+        self.shortcut = []
         # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self._keysequenceedit = KeySequenceEdit(editingFinished=self.on_editingFinished)
         button = QtWidgets.QPushButton("clear", clicked=self._keysequenceedit.clear)
         okbtn = QtWidgets.QPushButton("ok", clicked=callback)
-        okbtn.myData = btnIndex
+        okbtn.myData = myData
         close = QtWidgets.QPushButton("cancel", clicked=self.close)
         hlay = QtWidgets.QHBoxLayout(self)
         hlay.addWidget(self._keysequenceedit)
@@ -245,53 +247,137 @@ class HotKeyWidget(QtWidgets.QWidget):
     @QtCore.pyqtSlot()
     def on_editingFinished(self):
         txt = self._keysequenceedit.findChild(QtWidgets.QLineEdit, "qt_keysequenceedit_lineedit").displayText()
-        seqList = txt.split("+")
-        seqList = [ MACOS_KEYS_Inverted.get(i, i) for i in seqList ]
-        seqList = [ QT_CONVERSION.get(i, i) for i in seqList ]
-        self.seqList = [ QT_TO_ADAFRUIT.get(i, i) for i in seqList ]
+        shortcut = txt.split("+")
+        
+        if self.do_convert_to_adafruit_names:
+            shortcut = convertSymbolicToAdafruitNames(shortcut)
+        self.shortcut = shortcut
 
-data = OrderedDict((
-        ('name',['1','2','3','4','1']),
-        ('hotkey 1',[]),
-        ('hotkey 2',[])
-        ))
 
-encoderData = OrderedDict((
-        ('Zoom +/-',[ ['Shift', 'Command', '-'], ['Shift', 'Command', '='] ]),
-        ('Up/Down',[ ['Up'], ['Down'] ]),
-        ('Left/Right',[ ['Left'], ['Right'] ]),
-        ('Numbers', [ ["1"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["0"] ])
-        ))
- 
+
+
+
+class TextWidget(QtWidgets.QWidget):
+    def __init__(self, callback, myData):
+        super(TextWidget, self).__init__()
+        self.shortcut = []
+        # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self._textedit = QtWidgets.QLineEdit()
+        button = QtWidgets.QPushButton("clear", clicked=self._textedit.clear)
+        okbtn = QtWidgets.QPushButton("ok", clicked=callback)
+        okbtn.myData = myData
+        close = QtWidgets.QPushButton("cancel", clicked=self.close)
+        hlay = QtWidgets.QHBoxLayout(self)
+        hlay.addWidget(self._textedit)
+        hlay.addWidget(button)
+        hlay.addWidget(okbtn)
+        hlay.addWidget(close)
+    
+    def getText(self):
+        return self._textedit.displayText()
+# data = OrderedDict((
+#         ('name',['1','2','3','4','1']),
+#         ('hotkey 1',[]),
+#         ('hotkey 2',[])
+#         ))
+
+encoderData = [
+        {'Undo/Redo':[convertAdafruitToSymbolicNames(shortcut) for shortcut in [ ['Command', 'Z'], ['Shift', 'Command', 'Z'] ]]},
+        ]
+
+class QHLine(QtWidgets.QFrame):
+    def __init__(self):
+        super(QHLine, self).__init__()
+        self.setFrameShape(QtWidgets.QFrame.HLine)
+        self.setFrameShadow(QtWidgets.QFrame.Sunken)
+
 class EncoderTable(QtWidgets.QTableWidget):
     def __init__(self, data, *args):
         QtWidgets.QTableWidget.__init__(self, *args)
-        self.data = data
-        self.setData()
-        # self.resizeColumnsToContents()
-        # self.resizeRowsToContents()  
+        self._encData = data
+        self.setData()  
         self.verticalHeader().setVisible(False)
         self.setEditTriggers( QtWidgets.QAbstractItemView.NoEditTriggers )
-        
-        self.itemDoubleClicked.connect(self.itemDoubleClickedCallback)
-        # print(self.editCell(4,4, "test"))
+        self.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.cellDoubleClicked.connect(self.cellDoubleClickedCallback)
+        self.selectRow(0)
 
+    def importData(self, data):
+        self._encData = []
+        for k, i in data.items():
+            self._encData.append( {k:i})
+        self.setData()
+
+    @property
+    def currentEncoderIndex(self):
+        return self.currentRow()
+
+    def getLongestHotkeySetLenght(self):
+        list_len = [len(list(v.values())[0]) for v in self._encData]
+        return max(list_len) 
+
+    def updateColumnCount(self):
+        if self.columnCount() <= self.getLongestHotkeySetLenght()+1:
+            self.setColumnCount(self.getLongestHotkeySetLenght()+1)
+            header = f"hotkey {self.getLongestHotkeySetLenght()}"
+            headerItem = QtWidgets.QTableWidgetItem(header)
+            self.setHorizontalHeaderItem(self.getLongestHotkeySetLenght(), headerItem)
+
+    @property
+    def currentShortcutIndex(self):
+        value = self.currentColumn()-1
+        if value < 0:
+            return
+        return self.currentColumn()-1
+    
     def setData(self): 
+        self.clear()
+        self.setColumnCount(self.getLongestHotkeySetLenght()+1)
+        self.setRowCount(len(self._encData))
+
+        for row, item in  enumerate(self._encData):
+            shortcuts = tuple(item.values())[0]
+            nameItem = QtWidgets.QTableWidgetItem(tuple(item.keys())[0])
+            self.setItem(row, 0, nameItem)
+
+            for col in range(self.getLongestHotkeySetLenght()):
+                if col == len(shortcuts): break
+                shortcut = "+".join(shortcuts[col])
+                newitem = QtWidgets.QTableWidgetItem(shortcut)
+                self.setItem(row, col+1, newitem)
+
         horHeaders = []
-        for n, key in enumerate(self.data.keys()):
-            print(n, key)
-            horHeaders.append(key)
-            for m, item in enumerate(self.data[key]):
-                newitem = QtWidgets.QTableWidgetItem(item)
-                # newitem.setFlags(QtCore.Qt.ItemIsEnabled)
-                self.setItem(m, n, newitem)
+        for i in range(self.getLongestHotkeySetLenght()+1):
+            if i == 0:
+                header = "name"
+            else:
+                header = f"hotkey {i}"
+            horHeaders.append(header)
         self.setHorizontalHeaderLabels(horHeaders) 
-  
-    def itemDoubleClickedCallback(self, item):
-        # test
-        print(item.text())
-        item.setText("X")
-        
+
+    def __addTableRow(self, row_data):
+        row = self.rowCount()
+        self.setRowCount(row+1)
+        col = 0
+        for item in row_data:
+            cell = QtWidgets.QTableWidgetItem(str(item))
+            self.setItem(row, col, cell)
+            col += 1
+
+    def cellDoubleClickedCallback(self, row, col):
+        item = self.item(row,col)
+        if item is None:
+            item = QtWidgets.QTableWidgetItem("New Item")
+            _col = col
+            if col > len(self.getEncoderShortcuts(row)):
+                _col = len(self.getEncoderShortcuts(row))+1
+            self.setItem(row, _col, item)
+        if col != 0:
+            self.hotkeyEditor = HotKeyWidget(self.editHotkeyCallback, (row, col, item))
+            self.hotkeyEditor.show()
+        else:
+            self.textEditor = TextWidget(self.editNameCallback, row)
+            self.textEditor.show()
 
     def _addRow(self):
         self.rowCount()
@@ -301,328 +387,356 @@ class EncoderTable(QtWidgets.QTableWidget):
         self.columnCount()
         self.setColumnCount(self.columnCount()+1)
 
-    def addEncoder(self):
-        #add whole Row
-        pass
+    def addEncoder(self, encName, encList):
+        self._encData += [{encName:encList}]
+        if self.columnCount() < len(encList):
+            self.setColumnCount(len(encList) + 1)
+        row_data = [encName] + encList
+        self.__addTableRow(row_data)
 
-    def renameEncoder(self):
-        pass
+    def getEncoderName(self, encoderIndex):
+        return list(self._encData[encoderIndex].keys())[0]
 
-    def addItem(self):
+    def getEncoderShortcuts(self, encoderIndex):
+        return list(self._encData[encoderIndex].values())[0]
+
+    def renameEncoder(self, encoderIndex, newName):
+        oldName = self.getEncoderName(encoderIndex)
+        self._encData[encoderIndex][newName] = self._encData[encoderIndex][oldName]
+        del self._encData[encoderIndex][oldName]
+
+        item = self.itemAt(encoderIndex, 0)
+        item.setText(newName)
+
+    def addHotkeyUI(self):
+        if self.currentRow() == -1: return
+        self.hotkeyEditor = HotKeyWidget(self.addHotkeyUICallback, None)
+        self.hotkeyEditor.show()
+        
+
+    def editNameCallback(self):
+        encoderIndex = self.sender().myData
+        self.textEditor.close()
+        newName = self.textEditor.getText()
+        self.renameEncoder(encoderIndex, newName)
+
+    def addHotkeyUICallback(self):
+        self.hotkeyEditor.close()
+        self.__lastHotkey = self.hotkeyEditor.shortcut
+        self.addHotkey(self.__lastHotkey, self.currentRow())
+
+    def addHotkey(self, shortcut, encoderIndex):
         # adds column if needed
         # or edits empty cell
-        row = self.currentRow()
-        if row == -1:
-            return
+        self.getEncoderShortcuts(encoderIndex).append(shortcut)
+        self.updateColumnCount()
+        col = len(self.getEncoderShortcuts(encoderIndex))
+        
+        item = QtWidgets.QTableWidgetItem("+".join(shortcut))
+        self.setItem(encoderIndex, col, item)   
+        
+    def getShortcut(self, encoderIndex, shortcutIndex):
+        shortcut = self.getEncoderShortcuts(encoderIndex)[shortcutIndex]
+        item = self.itemAt(encoderIndex, shortcutIndex+1)
+        return dict(shortcut=shortcut, qtItem=item)
 
-    def myEditCell(self, row, col, text):
-        item = self.item(row, col)
-        item.setText(text)
+    def getShortcutFromTable(self, row, col):
+        encoderIndex = row
+        shortcutIndex = col + 1
+        shortcut = self.getEncoderShortcuts(encoderIndex)[0][shortcutIndex]
+        item = self.itemAt(row, col)
+        return dict(shortcut=shortcut, qtItem=item)
 
-    def removeEncoder(self):
+    def editHotkeyCallback(self):
+        row, col, item = self.sender().myData
+        encoderIndex = row
+        shortcutIndex = col + 1
+        self.hotkeyEditor.close()
+        self.__lastHotkey = self.hotkeyEditor.shortcut
+        
+        
+        if shortcutIndex >= len(self.getEncoderShortcuts(encoderIndex)):
+            self.getEncoderShortcuts(encoderIndex).append(self.__lastHotkey)
+        else:
+            
+            self.getEncoderShortcuts(encoderIndex)[shortcutIndex] = self.__lastHotkey
+
+        item.setText( "+".join(self.__lastHotkey) )
+    
+    def keyPressEvent(self, event):
+        if event.key() in [QtCore.Qt.Key_Delete, QtCore.Qt.Key_Backspace]:
+            encoderIndex = self.currentRow()
+            self.removeEncoder(encoderIndex)
+        else:
+            super().keyPressEvent(event)
+
+    def removeEncoder(self, encoderIndex):
+        ### TODO
         #remove selected Row
-        row = self.currentRow()
-        if row == -1:
-            return    
+        self.removeRow(encoderIndex)
+        del self._encData[encoderIndex]
+        pass  
+
+    def getFinalData(self):
+        data = {}
+        for encoderIndex in range(self.rowCount()):
+            name = self.getEncoderName(encoderIndex)
+            shortcuts = self.getEncoderShortcuts(encoderIndex)
+            data[name] = [convertSymbolicToAdafruitNames(shortcut) for shortcut in shortcuts]
+
+        return data
+
 
 
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        # self.hotkeyList = [[] for i in range(23)]
-        self.hotkeyList = DEFAULT_HOTKEYS
-        self.en1 = [["COMMAND","Z"], ["COMMAND","SHIFT","Z"]]
-        self.en2 = [["LEFT_BRACKET"], ["RIGHT_BRACKET"]]
-        self.en3 = [["LEFT_ARROW"], ["RIGHT_ARROW"]]
-        self.en4 = [["DOWN_ARROW"], ["UP_ARROW"]]
-        self.en5 = [["COMMAND","-"], ["COMMAND","="]]
-        self.en6 = [[], []]
-        self.en7 = [[], []]
         super().__init__()
+        self.hotkeyList = DEFAULT_HOTKEYS
 
-        self.setWindowTitle("Setting KeyMap")
+        self.setWindowTitle("BlastPad")
 
         layout = QtWidgets.QGridLayout()
-        self.setFixedSize(QtCore.QSize(900, 600))
+        self.setFixedSize(QtCore.QSize(1000, 700))
+
+        # self.setsCombo = QtWidgets.QComboBox()
+        # self.setsCombo.addItems(["default"])
+        # layout.addWidget(self.setsCombo, 0, 0)
+
+        # self.addSetBtn = QtWidgets.QPushButton("add set")
+        # self.addSetBtn.clicked.connect(self.addSetCallback)
+        # layout.addWidget(self.addSetBtn, 0, 1)
+
+        # self.removeSetBtn = QtWidgets.QPushButton("remove set")
+        # self.removeSetBtn.clicked.connect(self.removeSetCallback)
+        # layout.addWidget(self.removeSetBtn, 0, 2)
+
+        layout.addWidget(QHLine(), 1, 0,1,5)
+        
+        ###############################################################
 
         self.btn1 = QtWidgets.QPushButton("key 1")
         self.btn1.myData = 1
         self.btn1.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn1, 0, 0)
+        layout.addWidget(self.btn1, 2, 0)
 
         self.btn2 = QtWidgets.QPushButton("key 2")
         self.btn2.myData = 2
         self.btn2.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn2, 0, 1)
+        layout.addWidget(self.btn2, 2, 1)
 
         self.btn3 = QtWidgets.QPushButton("key 3")
         self.btn3.myData = 3
         self.btn3.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn3, 0, 2)
+        layout.addWidget(self.btn3, 2, 2)
 
         self.btn4 = QtWidgets.QPushButton("key 4")
         self.btn4.myData = 4
         self.btn4.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn4, 0, 3)
+        layout.addWidget(self.btn4, 2, 3)
 
         self.btn5 = QtWidgets.QPushButton("key 5")
         self.btn5.myData = 5
         self.btn5.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn5, 0, 4)
+        layout.addWidget(self.btn5, 2, 4)
 
         self.btn6 = QtWidgets.QPushButton("key 6")
         self.btn6.myData = 6
         self.btn6.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn6, 1, 0)
+        layout.addWidget(self.btn6, 3, 0)
 
         self.btn7 = QtWidgets.QPushButton("key 7")
         self.btn7.myData = 7
         self.btn7.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn7, 1, 1)
+        layout.addWidget(self.btn7, 3, 1)
 
         self.btn8 = QtWidgets.QPushButton("key 8")
         self.btn8.myData = 8
         self.btn8.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn8, 1, 2)
+        layout.addWidget(self.btn8, 3, 2)
 
         self.btn9 = QtWidgets.QPushButton("key 9")
         self.btn9.myData = 9
         self.btn9.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn9, 1, 3)
+        layout.addWidget(self.btn9, 3, 3)
 
         self.btn10 = QtWidgets.QPushButton("key 10")
         self.btn10.myData = 10
         self.btn10.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn10, 1, 4)
+        layout.addWidget(self.btn10,3, 4)
 
         self.btn11 = QtWidgets.QPushButton("key 11")
         self.btn11.myData = 11
         self.btn11.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn11, 2, 0)
+        layout.addWidget(self.btn11, 4, 0)
 
         self.btn12 = QtWidgets.QPushButton("key 12")
         self.btn12.myData = 12
         self.btn12.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn12, 2, 1)
+        layout.addWidget(self.btn12, 4, 1)
 
         self.btn13 = QtWidgets.QPushButton("key 13")
         self.btn13.myData = 13
         self.btn13.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn13, 2, 2)
+        layout.addWidget(self.btn13, 4, 2)
 
         self.btn14 = QtWidgets.QPushButton("key 14")
         self.btn14.myData = 14
         self.btn14.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn14, 2, 3)
+        layout.addWidget(self.btn14, 4, 3)
 
         self.btn15 = QtWidgets.QPushButton("key 15")
         self.btn15.myData = 15
         self.btn15.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn15, 2, 4)
+        layout.addWidget(self.btn15, 4, 4)
 
         self.btn16 = QtWidgets.QPushButton("key 16")
         self.btn16.myData = 16
         self.btn16.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn16, 3, 0, 1, 2)
+        layout.addWidget(self.btn16, 5, 0, 1, 2)
 
         self.btn17 = QtWidgets.QPushButton("key 17")
         self.btn17.myData = 17
         self.btn17.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn17, 3, 2)
+        layout.addWidget(self.btn17, 5, 2)
 
         self.btn18 = QtWidgets.QPushButton("key 18")
         self.btn18.myData = 18
         self.btn18.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn18, 3, 3)
+        layout.addWidget(self.btn18, 5, 3)
 
         self.btn19 = QtWidgets.QPushButton("key 19")
         self.btn19.myData = 19
         self.btn19.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn19, 3, 4)
+        layout.addWidget(self.btn19, 5, 4)
 
         self.btn20 = QtWidgets.QPushButton("key 20")
         self.btn20.myData = 20
         self.btn20.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn20, 4, 0)
+        layout.addWidget(self.btn20, 6, 0)
 
         self.btn21 = QtWidgets.QPushButton("key 21")
         self.btn21.myData = 21
         self.btn21.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn21, 4, 1)
+        layout.addWidget(self.btn21, 6, 1)
 
         self.btn22 = QtWidgets.QPushButton("key 22")
         self.btn22.myData = 22
         self.btn22.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn22, 4, 2)
+        layout.addWidget(self.btn22, 6, 2)
 
         self.btn23 = QtWidgets.QPushButton("key 23")
         self.btn23.myData = 23
         self.btn23.clicked.connect(self.btnCallback)
-        layout.addWidget(self.btn23, 4, 3, 1, 2)
+        layout.addWidget(self.btn23, 6, 3, 1, 2)
 
-        # self.btnEn1Left = QtWidgets.QPushButton("en1 left")
-        # self.btnEn1Left.myData = (1, 0)
-        # self.btnEn1Left.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn1Left, 5, 3)
-        # self.btnEn1Right = QtWidgets.QPushButton("en1 right")
-        # self.btnEn1Right.myData = (1, 1)
-        # self.btnEn1Right.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn1Right, 5, 4)
-
-        # self.btnEn2Left = QtWidgets.QPushButton("en2 left")
-        # self.btnEn2Left.myData = (2, 0)
-        # self.btnEn2Left.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn2Left, 6, 3)
-        # self.btnEn2Right = QtWidgets.QPushButton("en2 right")
-        # self.btnEn2Right.myData = (2, 1)
-        # self.btnEn2Right.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn2Right, 6, 4)
-
-        # self.btnEn3Left = QtWidgets.QPushButton("en3 left")
-        # self.btnEn3Left.myData = (3, 0)
-        # self.btnEn3Left.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn3Left, 7, 3)
-        # self.btnEn3Right = QtWidgets.QPushButton("en3 right")
-        # self.btnEn3Right.myData = (3, 1)
-        # self.btnEn3Right.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn3Right, 7, 4)
-
-        # self.btnEn4Left = QtWidgets.QPushButton("en4 left")
-        # self.btnEn4Left.myData = (4, 0)
-        # self.btnEn4Left.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn4Left, 8, 3)
-        # self.btnEn4Right = QtWidgets.QPushButton("en4 right")
-        # self.btnEn4Right.myData = (4, 1)
-        # self.btnEn4Right.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn4Right, 8, 4)
-
-        # self.btnEn5Left = QtWidgets.QPushButton("en5 left")
-        # self.btnEn5Left.myData = (5, 0)
-        # self.btnEn5Left.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn5Left, 9, 3)
-        # self.btnEn5Right = QtWidgets.QPushButton("en5 right")
-        # self.btnEn5Right.myData = (5, 1)
-        # self.btnEn5Right.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn5Right, 9, 4)
-
-        # self.btnEn6Left = QtWidgets.QPushButton("en6 left")
-        # self.btnEn6Left.myData = (6, 0)
-        # self.btnEn6Left.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn6Left, 10, 3)
-        # self.btnEn6Right = QtWidgets.QPushButton("en6 right")
-        # self.btnEn6Right.myData = (6, 1)
-        # self.btnEn6Right.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn6Right, 10, 4)
-
-        # self.btnEn7Left = QtWidgets.QPushButton("en7 left")
-        # self.btnEn7Left.myData = (7, 0)
-        # self.btnEn7Left.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn7Left, 11, 3)
-        # self.btnEn7Right = QtWidgets.QPushButton("en7 right")
-        # self.btnEn7Right.myData = (7, 1)
-        # self.btnEn7Right.clicked.connect(self.encoderCallback)
-        # layout.addWidget(self.btnEn7Right, 11, 4)
+        layout.addWidget(QHLine(), 7, 0,1,5)
         
-        # self.listwidget = QtWidgets.QListWidget()
-        # for i in range(202):
-        #     self.listwidget.insertItem(i, f"{i}")
-        # layout.addWidget(self.listwidget, 5, 3, 7, 2)
-        
-        table = EncoderTable(data, 4, 3)
+        ###############################################################
 
-        layout.addWidget(table, 5, 0, 7, 5)
+        self.encTable = EncoderTable(encoderData, 4, 3)
+        layout.addWidget(self.encTable, 8, 0, 6, 5)
 
-        btn = QtWidgets.QPushButton("add")
-        btn.clicked.connect(self.printCallback)
-        layout.addWidget(btn, 12, 4)
-
-
-        btn = QtWidgets.QPushButton("print")
-        btn.clicked.connect(self.printCallback)
+        btn = QtWidgets.QPushButton("add encoder")
+        btn.clicked.connect(self.addEncoderCallback)
         layout.addWidget(btn, 14, 4)
+
+        btn = QtWidgets.QPushButton("add hotkey")
+        btn.clicked.connect(self.addHotkeyCallback)
+        layout.addWidget(btn, 14, 3)
+
+
+        btn = QtWidgets.QPushButton("load")
+        btn.clicked.connect(self.loadCallback)
+        layout.addWidget(btn, 15, 3)
+
+        btn = QtWidgets.QPushButton("save")
+        btn.clicked.connect(self.saveCallback)
+        layout.addWidget(btn, 15, 4)
 
         widget = QtWidgets.QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
-        self.updateUIMapping()
+        self.refreshButtons()
     
-    def updateUIMapping(self):
+    def refreshButtons(self):
         for i, hotkey in enumerate(self.hotkeyList):
-            
             btnID = i + 1
             name = f"btn{btnID}"
             obj = getattr(self, name)
             obj.setText("+".join(hotkey))
 
-        # for i in range(7):
-        #     enID = i + 1
-        #     name = f"en{enID}"
-        #     en = getattr(self, name)
+    def addEncoderCallback(self):
+        self.encTable.addEncoder("new encoder", [])
+    
+    def addHotkeyCallback(self):
+        
+        self.encTable.addHotkeyUI()
 
-        #     if en == [[],[]]: continue
+    def getFinalBtnMatrixData(self):
+        return [convertSymbolicToAdafruitNames(shortcut) for shortcut in self.hotkeyList]
 
-        #     nameLeft = f"btn{name.title()}Left"
-        #     obj = getattr(self, nameLeft)
-        #     obj.setText("+".join(en[0]))
+    def loadCallback(self):
+        path = ""
+        if os.path.exists(CONFIG_PATH):
+            path = CONFIG_PATH
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", path,"json blastpad file (*.json)")
+        if fileName == "": return
+        with open(fileName, "r") as f:
+            blastPadDict = convertAdafruitConfigToSymbolic(json.load(f))
 
-        #     nameRight = f"btn{name.title()}Right"
-        #     obj = getattr(self, nameRight)
-        #     obj.setText("+".join(en[1]))
+            self.hotkeyList = blastPadDict['shortcuts']
+            self.refreshButtons()
+            self.encTable.importData(blastPadDict['wheels'])
+        pass
 
-    def printCallback(self):
+    def saveCallback(self):
+        json_text = self.getJsonStr()
+        path = ""
+        if os.path.exists(CONFIG_PATH):
+            path = CONFIG_PATH
+        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(self,"QFileDialog.getSaveFileName()",path,"json blastpad file (*.json)")
+        if fileName == "": return
+        with open(fileName, "w") as f:
+            f.write(json_text)
         print()
-        encoderDict = {}
-        for i in self.__dict__:
-            if i.startswith("en"):
-                if self.__dict__[i] == [[],[]]: continue
-                encoderDict[i] = self.__dict__[i]
+        print(json_text)
+        print()
+    
+    def getJsonStr(self):
+        encoderDict = self.encTable.getFinalData()
+        hotkeyList = self.getFinalBtnMatrixData()
 
         dictionary = {
-            "shortcuts": self.hotkeyList,
+            "shortcuts": hotkeyList,
             "wheels":  encoderDict
 
         }
-        json_object = json.dumps(dictionary, indent = 1)
-        print(json_object)
-        print()
+        pprint.pprint(dictionary)
 
-    def addHotkeyToEncoder(self):
-        self.button = self.sender()
-        btnIndex, sideIndex = self.button.myData
-        self.hotkeyEditor.close()
-        self._encObj[sideIndex] = self.hotkeyEditor.seqList
-        name = f"btnEn{btnIndex}Left"
-        if sideIndex == 1:
-            name = f"btnEn{btnIndex}Right"
-        obj = getattr(self, name)
-        obj.setText( "+".join(self.hotkeyEditor.seqList) )
-        print("+".join(self.hotkeyEditor.seqList))
+        json_object = json.dumps(dictionary)
+        return json_object
 
     def addHotkey(self):
         self.button = self.sender()
         name = f"btn{self.button.myData}"
         obj = getattr(self, name)
         self.hotkeyEditor.close()
-        self.hotkeyList[self.button.myData-1] = self.hotkeyEditor.seqList
-        obj.setText( "+".join(self.hotkeyEditor.seqList) )
+        self.hotkeyList[self.button.myData-1] = self.hotkeyEditor.shortcut
+        obj.setText( "+".join(self.hotkeyEditor.shortcut) )
 
-    def encoderCallback(self):
-        button = self.sender()
-        
-        if "left" in button.text() and "en" in button.text():
-            btnIndex = int(button.text()[2])
-            sideIndex = 0
-            button.myData = (btnIndex, sideIndex)
+    def addSetCallback(self):
+        self.textEditor = TextWidget(self.textEditorCallback, None)
+        self.textEditor.show()
 
-        if "right" in button.text() and "en" in button.text():
-            btnIndex = int(button.text()[2])
-            sideIndex = 1
-            button.myData = (btnIndex, sideIndex)
+    def addSetTextEditorCallback(self):
+        ###TODO
+        name = self.textEditor.getText()
+        self.textEditor.close()
 
-        encName = f"en{button.myData[0]}"
-        self._encObj = getattr(self, encName)
-        self.hotkeyEditor = HotKeyWidget(self.addHotkeyToEncoder, button.myData)
-        self.hotkeyEditor.show()
+    def removeSetCallback(self):
+        ###TODO
+        pass
 
     def btnCallback(self):
         button = self.sender()
@@ -632,6 +746,8 @@ class MainWindow(QtWidgets.QMainWindow):
             button.myData = btnIndex
         self.hotkeyEditor = HotKeyWidget(self.addHotkey, button.myData)
         self.hotkeyEditor.show()
+
+
 
 app = QtWidgets.QApplication(sys.argv)
 

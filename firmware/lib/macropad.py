@@ -44,12 +44,13 @@ def initOptions():
 	configDir = os.listdir("configs")
 	optionsDict = {}
 	for file in configDir:
+		if file.startswith("."): continue
 		if file.split(".")[-1] != "json": continue
 		path = f"configs/{file}"
 		with open(path,"r") as f:
 			json_txt = f.read()
 			mappingDict = json.loads(json_txt)
-
+			mappingDict["path"] = path
 			shortcuts = []
 
 			for shortcutSet in mappingDict['shortcuts']:
@@ -72,6 +73,8 @@ def initOptions():
 						wheelShortcuts.append(wheelObjs)
 					wheels[wheelTitle] = wheelShortcuts
 			mappingDict['wheels'] = wheels
+			if "cache" not in mappingDict.keys():
+				mappingDict["cache"] = {}
 			
 			optionsDict[file[:-5]] = mappingDict
 
@@ -108,12 +111,11 @@ class MacroPadUI:
 	shortcutList = None
 	enc1CarouselIndex = 0
 	enc2CarouselIndex = 0
-
 	def __init__(self, 
 					sda="GP8", scl="GP9", 
-					A1pin="GP2", B1pin="GP3", 
+					A1pin="GP3", B1pin="GP2", 
 					wheelSwitchPin1="GP15", 
-					A2pin="GP4", B2pin="GP5", 
+					A2pin="GP5", B2pin="GP4", 
 					wheelSwitchPin2="GP1", 
 					allowWheelConfChangeSwitchPin="GP0"
 				):
@@ -123,20 +125,19 @@ class MacroPadUI:
 									keyUpCallback=self.buttonUpCallback
 									)
 		self.optionsDict = initOptions()
+		
 		self.optionSetNames = list(self.optionsDict.keys())
 		self._optionSetUiChunks = divideListIntoUIChunks(range(len(self.optionSetNames)))
 		self.optionCount = len(self.optionSetNames)
 		
-		self.wheelSelection1Cache = {name:0 for name in self.optionSetNames}
-		self.wheelSelection2Cache = {name:0 for name in self.optionSetNames}
-
+		self.avaibleWheelOptions = []
 		self.selection = 0
 		self._uiSelection = 0 # 0 = top, 1 = middle, 2 = bottom
 		self._last_uiSelection = self._uiSelection
 		self._uiChunkIndex = 0
 		self._currentChunk = 0
 		self.wheelSelection1 = 0
-		self.wheelSelection2 = 0
+		self.wheelSelection2 = 1 # self.getDefaultEn2()
 		self.currentOptionName = self.optionSetNames[self.selection]
 		self.frozen_encoder_position = None
 
@@ -144,6 +145,47 @@ class MacroPadUI:
 		self.setWheelOptions()
 		self.initDisplay(sda, scl, A1pin, B1pin, A2pin, B2pin, wheelSwitchPin1, wheelSwitchPin2, allowWheelConfChangeSwitchPin)
 		self.updateOptionSet()
+
+	# def getDefaultEn2(self):
+	# 	return len(self.avaibleWheelOptions) - 1
+
+	def setEn1Cache(self, value):
+		self.optionsDict[self.currentOptionName]["cache"]["en1"] = value
+
+	def setEn2Cache(self, value):
+		self.optionsDict[self.currentOptionName]["cache"]["en2"] = value
+
+	def getEn1Cache(self):
+		value = self.optionsDict[self.currentOptionName]["cache"].get("en1")
+		if value is None:
+			value = 0
+		return value
+
+	def getEn2Cache(self):
+		value = self.optionsDict[self.currentOptionName]["cache"].get("en2")
+		if value is None:
+			value = 1 # self.getDefaultEn2()
+		return value
+
+	def saveCache(self):
+		self.setEn1Cache(self.wheelSelection1)
+		self.setEn2Cache(self.wheelSelection2)
+
+
+	def loadCache(self):
+		self.wheelSelection1 = 0
+		en1CachedValue = self.getEn1Cache()
+		
+		if en1CachedValue < len(self.avaibleWheelOptions):
+			self.wheelSelection1 = en1CachedValue
+
+		self.wheelSelection2 = 1 # self.getDefaultEn2()
+		en2CachedValue = self.getEn2Cache()
+		
+		if en2CachedValue < len(self.avaibleWheelOptions):
+			self.wheelSelection2 = en2CachedValue
+
+
 
 	def initDisplay(self, sda, scl, A1pin, B1pin, A2pin, B2pin, wheelSwitchPin1, wheelSwitchPin2, allowWheelConfChangeSwitchPin):
 		wheelSwitchPin1 = digitalio.DigitalInOut(getattr(board, wheelSwitchPin1))
@@ -205,6 +247,7 @@ class MacroPadUI:
 		self.allowWheelConfChangeSwitch.update()
 		if self.allowWheelConfChangeSwitch.fell:
 			self._allowWheelConfChange = True
+			self.saveCache()
 			self.updateOptionSet()
 
 		if self.allowWheelConfChangeSwitch.rose:
@@ -277,11 +320,9 @@ class MacroPadUI:
 
 	def en2ActionUp(self):
 		if self.isEnc2LeftRight:
-			print("A")
 			self.kbd.press(*self.enc2Actions[0])
 			self.kbd.release(*self.enc2Actions[0])
 		else:
-			print("B")
 			self.kbd.press(*self.enc2Actions[self.enc2CarouselIndex])
 			self.kbd.release(*self.enc2Actions[self.enc2CarouselIndex])
 			self.enc2CarouselIndex -= 1
@@ -290,11 +331,9 @@ class MacroPadUI:
 		
 	def en2ActionDown(self):
 		if self.isEnc2LeftRight:
-			print("A")
 			self.kbd.press(*self.enc2Actions[1])
 			self.kbd.release(*self.enc2Actions[1])
 		else:
-			print("B")
 			self.kbd.press(*self.enc2Actions[self.enc2CarouselIndex])
 			self.kbd.release(*self.enc2Actions[self.enc2CarouselIndex])
 			self.enc2CarouselIndex += 1
@@ -333,9 +372,10 @@ class MacroPadUI:
 
 	def updateOptionSet(self):
 		self.shortcutList = self.optionsDict[self.currentOptionName]['shortcuts']
+		# self.cacheDict = self.optionsDict[self.currentOptionName]["cache"]
 
-		self.wheelSelection1 = 0 # todo:cache it instead of reassigning to 0
-		self.wheelSelection2 = 0 # todo:cache it instead of reassigning to 0
+		self.loadCache()
+
 		self.updateGUI()
 		self.currentOptionName = self.optionSetNames[self.selection]
 		self.setWheelOptions()
@@ -344,9 +384,15 @@ class MacroPadUI:
 	def setWheelOptions(self):
 		print("setWheelOptions")
 		self.avaibleWheelOptions = list(self.optionsDict[self.currentOptionName]['wheels'].keys())
+		
+		if self.wheelSelection1 >= len(self.avaibleWheelOptions):
+			self.wheelSelection1 = 0
 		self.setWheel1txt(self.avaibleWheelOptions[self.wheelSelection1])
-		self.setWheel2txt(self.avaibleWheelOptions[self.wheelSelection2])
 		self.enc1Actions = self.optionsDict[self.currentOptionName]['wheels'][self.getWheel1txt()]
+
+		if self.wheelSelection2 >= len(self.avaibleWheelOptions):
+			self.wheelSelection2 = 0
+		self.setWheel2txt(self.avaibleWheelOptions[self.wheelSelection2])
 		self.enc2Actions = self.optionsDict[self.currentOptionName]['wheels'][self.getWheel2txt()]
 		
 
