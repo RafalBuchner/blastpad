@@ -15,7 +15,7 @@ from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 from minikbd import MiniKbdButtons
-
+import collections
 
 def divideListIntoUIChunks(l):
 	div_l = []
@@ -78,7 +78,7 @@ def initOptions():
 			
 			optionsDict[file[:-5]] = mappingDict
 
-	return optionsDict
+	return collections.OrderedDict(sorted(optionsDict.items(), key=lambda t: t[0]))
 
 
 class Encoder:
@@ -497,4 +497,3 @@ class MacroPadUI:
 	#     pass
 
 
-#

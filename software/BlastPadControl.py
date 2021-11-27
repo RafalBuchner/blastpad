@@ -1,42 +1,74 @@
-import sys, os
+import sys, os, copy
 import json
 from collections import OrderedDict
 import pprint
-# from PyQt5.QtCore import Qt, QSize
-# from PyQt5.QtWidgets import QApplication, QGridLayout, QLabel, QMainWindow, QWidget, QPushButton
-
-from layout_colorwidget import Color
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 CONFIG_PATH = "/Volumes/BlastPad/configs"
 
 def convertSymbolicToAdafruitNames(shortcut):
-    shortcut = [ MACOS_KEYS_Inverted.get(i, i) for i in shortcut ]
+    shortcut = [ SYSTEM_KEY_SYMBOLS_Inverted.get(i, i) for i in shortcut ]
     shortcut = [ QT_CONVERSION.get(i, i) for i in shortcut ]
     shortcut = [ QT_TO_ADAFRUIT.get(i, i) for i in shortcut ]
     return shortcut
 
 def convertAdafruitToSymbolicNames(shortcut):
     shortcut = [ QT_TO_ADAFRUIT_Inverted.get(i, i) for i in shortcut ]
-    shortcut = [ MACOS_KEYS.get(i, i) for i in shortcut ]
+    shortcut = [ SYSTEM_KEY_SYMBOLS.get(i, i) for i in shortcut ]
     # shortcut = [ QT_CONVERSION_Inverted.get(i, i) for i in shortcut ]
     return shortcut
+    
 def convertAdafruitConfigToSymbolic(blastPadDict):
     blastPadDict["shortcuts"] = [convertAdafruitToSymbolicNames(shortcut) for shortcut in blastPadDict["shortcuts"]]
     for enName, shortcuts in blastPadDict["wheels"].items():
         blastPadDict["wheels"][enName] = [convertAdafruitToSymbolicNames(shortcut) for shortcut in shortcuts]
     return blastPadDict
 
-QT_CONVERSION = {
-        "Meta":"Control",
-        "Ctrl":"Command",
-        "Alt":"Option",
-        "Esc":"Escape",
-        "Del":"Delete",
-    }
+if sys.platform == "darwin":
+    QT_CONVERSION = {
+            "Meta":"Control",
+            "Ctrl":"Command",
+            "Alt":"Option",
+            "Esc":"Escape",
+            "Del":"Delete",
+        }
+else:
+    QT_CONVERSION = {
+            "Meta":"Windows",
+            "Ctrl":"Control",
+            "Esc":"Escape",
+            "Del":"Delete",
+        }
 
 QT_CONVERSION_Inverted = {v: k for k, v in QT_CONVERSION.items()}
-1234567890123456789012345678901234567890123456
+
+
+SYSTEM_KEY_SYMBOLS = {
+    "Meta":"⌃",
+    "Ctrl":"⌘",
+    "Command":"⌘",
+    "Shift":"⇧",
+    "Alt":"⌥",
+    "Return":"↵",
+    "Enter":"⌤",
+    "Up":"↑",
+    "Down":"↓",
+    "Left":"←",
+    "Right":"→",
+    "Esc":"⎋",
+    "Backspace":"⌫",
+    "End":"↘",
+    "Home":"↖",
+    "Del":"⌦",
+    "PgDown":"⇟",
+    "PgUp":"⇞",
+    "Tab":"⇥",
+    "CapsLock":"⇪"
+
+}
+
+SYSTEM_KEY_SYMBOLS_Inverted = {v: k for k, v in SYSTEM_KEY_SYMBOLS.items()}
+
 QT_TO_ADAFRUIT = {
     "1":"ONE",
     "2":"TWO",
@@ -154,31 +186,6 @@ QT_TO_ADAFRUIT = {
 
 QT_TO_ADAFRUIT_Inverted = {v: k for k, v in QT_TO_ADAFRUIT.items()}
 
-MACOS_KEYS = {
-    "Meta":"⌃",
-    "Ctrl":"⌘",
-    "Command":"⌘",
-    "Shift":"⇧",
-    "Alt":"⌥",
-    "Return":"↵",
-    "Enter":"⌤",
-    "Up":"↑",
-    "Down":"↓",
-    "Left":"←",
-    "Right":"→",
-    "Esc":"⎋",
-    "Backspace":"⌫",
-    "End":"↘",
-    "Home":"↖",
-    "Del":"⌦",
-    "PgDown":"⇟",
-    "PgUp":"⇞",
-    "Tab":"⇥",
-    "CapsLock":"⇪"
-
-}
-
-MACOS_KEYS_Inverted = {v: k for k, v in MACOS_KEYS.items()}
 
 SHIFT_FIX = {
         "~": "`",
@@ -217,8 +224,8 @@ class KeySequenceEdit(QtWidgets.QKeySequenceEdit):
             _last_seq = last_seq.split("+")
             txt = []
             for key in _last_seq:
-                if key in MACOS_KEYS.keys():
-                    key = MACOS_KEYS[key]
+                if key in SYSTEM_KEY_SYMBOLS.keys():
+                    key = SYSTEM_KEY_SYMBOLS[key]
                 txt += [key]
             txt = "+".join(txt)
             le = self.findChild(QtWidgets.QLineEdit, "qt_keysequenceedit_lineedit")
@@ -394,18 +401,24 @@ class EncoderTable(QtWidgets.QTableWidget):
         row_data = [encName] + encList
         self.__addTableRow(row_data)
 
+
+
     def getEncoderName(self, encoderIndex):
         return list(self._encData[encoderIndex].keys())[0]
 
     def getEncoderShortcuts(self, encoderIndex):
         return list(self._encData[encoderIndex].values())[0]
 
+    def deleteEncoders(self, indexes):
+        # delete
+        self.setData()
+
     def renameEncoder(self, encoderIndex, newName):
         oldName = self.getEncoderName(encoderIndex)
-        self._encData[encoderIndex][newName] = self._encData[encoderIndex][oldName]
+        oldEncData = copy.deepcopy(self._encData[encoderIndex][oldName])
+        self._encData[encoderIndex][newName] = oldEncData
         del self._encData[encoderIndex][oldName]
-
-        item = self.itemAt(encoderIndex, 0)
+        item = self.item(encoderIndex, 0)
         item.setText(newName)
 
     def addHotkeyUI(self):
@@ -482,7 +495,7 @@ class EncoderTable(QtWidgets.QTableWidget):
         for encoderIndex in range(self.rowCount()):
             name = self.getEncoderName(encoderIndex)
             shortcuts = self.getEncoderShortcuts(encoderIndex)
-            data[name] = [convertSymbolicToAdafruitNames(shortcut) for shortcut in shortcuts]
+            data[name] = [convertSymbolicToAdafruitNames(shortcut) for shortcut in shortcuts if len(shortcut) != 0]
 
         return data
 
@@ -712,9 +725,9 @@ class MainWindow(QtWidgets.QMainWindow):
             "wheels":  encoderDict
 
         }
-        pprint.pprint(dictionary)
 
-        json_object = json.dumps(dictionary)
+        json_object = json.dumps(dictionary, indent=1)
+
         return json_object
 
     def addHotkey(self):
