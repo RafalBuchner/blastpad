@@ -1,4 +1,4 @@
-![package_cover](/Users/rafalbuchner/Documents/blastpad/Photos/package_cover.png)
+![package_cover](/Photos/package_cover.png)
 
 # BLASTPad
 
@@ -12,7 +12,7 @@
 
 
 
-![top_view_description](/Users/rafalbuchner/Documents/blastpad/resources/top_view_description.png)
+![top_view_description](/resources/top_view_description.png)
 
 
 
@@ -26,13 +26,13 @@ Keyborad's layout was designed to resamble the most left 5 columns of a standard
 2. Wait until **BLAST** logo will disappear.
 3. You should see the similar data on the display:
 
-![Default-Display](/Users/rafalbuchner/Documents/blastpad/Photos/Default-Display.png)
+![Default-Display](/Photos/Default-Display.png)
 
 - "Default" is a title of currently active **Preset**.
 - "Numbers" is a title of an **Encoder Action** currently assigned to the **Encoder 1**
 - "Up/Down" is a title of an **Encoder Action** currently assigned to the **Encoder 2**
 
-![Default-Display-description](/Users/rafalbuchner/Documents/blastpad/Photos/Default-Display-description.png)
+![Default-Display-description](/Photos/Default-Display-description.png)
 
 ### Encoder Basics
 
@@ -104,11 +104,11 @@ Each **Preset** has actions assigned to the keys, which max number in the preset
 
 
 
-![BlastPad_300x300](/Users/rafalbuchner/Documents/blastpad/Photos/BlastPad_300x300.jpg)
+![BlastPad_300x300](/Photos/BlastPad_300x300.jpg)
 
-![BlastPad1_300x300](/Users/rafalbuchner/Documents/blastpad/Photos/BlastPad1_300x300.jpg)
+![BlastPad1_300x300](/Photos/BlastPad1_300x300.jpg)
 
-![BlastPad2_300x300](/Users/rafalbuchner/Documents/blastpad/Photos/BlastPad2_300x300.jpg)
+![BlastPad2_300x300](/Photos/BlastPad2_300x300.jpg)
 
-![BlastPad3_300x300](/Users/rafalbuchner/Documents/blastpad/Photos/BlastPad3_300x300.jpg)
+![BlastPad3_300x300](/Photos/BlastPad3_300x300.jpg)
 
