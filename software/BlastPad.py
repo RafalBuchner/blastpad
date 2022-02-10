@@ -4,11 +4,7 @@ from collections import OrderedDict
 import pprint
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-version = "0.0.0.2"
-if sys.platform == "darwin":
-    CONFIG_PATH = "/Volumes/BlastPad/configs"
-else:
-    pass
+CONFIG_PATH = "/Volumes/BlastPad/configs"
 
 def convertSymbolicToAdafruitNames(shortcut):
     shortcut = [ SYSTEM_KEY_SYMBOLS_Inverted.get(i, i) for i in shortcut ]
@@ -46,56 +42,30 @@ else:
 
 QT_CONVERSION_Inverted = {v: k for k, v in QT_CONVERSION.items()}
 
-if sys.platform == "darwin":
-    SYSTEM_KEY_SYMBOLS = {
-        "Meta":"⌃",
-        "Ctrl":"⌃",
-        "Control":"⌃",
-        "Command":"⌘",
-        "Shift":"⇧",
-        "Alt":"⌥",
-        "Return":"↵",
-        "Enter":"⌤",
-        "Up":"↑",
-        "Down":"↓",
-        "Left":"←",
-        "Right":"→",
-        "Esc":"⎋",
-        "Backspace":"⌫",
-        "End":"↘",
-        "Home":"↖",
-        "Del":"⌦",
-        "PgDown":"⇟",
-        "PgUp":"⇞",
-        "Tab":"⇥",
-        "CapsLock":"⇪"
 
-    }
-else:
-    SYSTEM_KEY_SYMBOLS = {
-        "Meta":"❖",
-        "Ctrl":"Ctrl",
-        "Control":"Ctrl",
-        "Command":"❖",
-        "Shift":"⇧",
-        "Alt":"Alt",
-        "Return":"↵",
-        "Enter":"⌤",
-        "Up":"↑",
-        "Down":"↓",
-        "Left":"←",
-        "Right":"→",
-        "Esc":"Esc",
-        "Backspace":"⌫",
-        "End":"↘",
-        "Home":"↖",
-        "Del":"Del",
-        "PgDown":"PgDown",
-        "PgUp":"PgUp",
-        "Tab":"⇥",
-        "CapsLock":"CapsLock"
+SYSTEM_KEY_SYMBOLS = {
+    "Meta":"⌃",
+    "Ctrl":"⌘",
+    "Command":"⌘",
+    "Shift":"⇧",
+    "Alt":"⌥",
+    "Return":"↵",
+    "Enter":"⌤",
+    "Up":"↑",
+    "Down":"↓",
+    "Left":"←",
+    "Right":"→",
+    "Esc":"⎋",
+    "Backspace":"⌫",
+    "End":"↘",
+    "Home":"↖",
+    "Del":"⌦",
+    "PgDown":"⇟",
+    "PgUp":"⇞",
+    "Tab":"⇥",
+    "CapsLock":"⇪"
 
-    }
+}
 
 SYSTEM_KEY_SYMBOLS_Inverted = {v: k for k, v in SYSTEM_KEY_SYMBOLS.items()}
 
